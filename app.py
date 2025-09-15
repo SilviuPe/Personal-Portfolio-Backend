@@ -1,9 +1,29 @@
 from flask import Flask
+from database import Database
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/projects', methods=['GET'])
 def index():
-    return 'Hello World!'
+
+    try:
+        projects = Database().get_projects()
+
+        if 'error' in projects:
+
+            return {
+                'status': 'error',
+                'message': projects['error']
+            }, 400
+
+        else:
+
+            return projects
+
+    except Exception as e:
+        return {
+            'status': 'error',
+            'message': str(e)
+        }, 400
 
 if __name__ == '__main__':
     app.run()
