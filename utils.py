@@ -6,7 +6,7 @@ def gather_information_about_repo(projects: list):
     data = []
 
     for project in projects:
-        repo_link = projects[0]['github_link']
+        repo_link = project['github_link']
 
         repo_data = {
             'repo_link': repo_link,
