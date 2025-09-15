@@ -45,7 +45,9 @@ class Database(object):
 
         if 'error' in connection:
 
-            return connection['error']
+            return {
+                'error': connection['error']
+            }
 
         else:
             cursor = connection.cursor()
