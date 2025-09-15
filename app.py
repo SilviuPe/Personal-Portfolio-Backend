@@ -20,7 +20,7 @@ def index():
             }, 400
 
         else:
-            data = gather_information_about_repo(projects[0]['github_link'])
+            data = gather_information_about_repo(projects)
 
             if data:
                 return data, 200
