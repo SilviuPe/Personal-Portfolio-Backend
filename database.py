@@ -31,7 +31,9 @@ class Database(object):
 
             if connection:
 
-                return connection
+                return {
+                    'connection' : connection
+                }
 
         except Exception as error:
 
@@ -50,7 +52,7 @@ class Database(object):
             }
 
         else:
-            cursor = connection.cursor()
+            cursor = connection['connection'].cursor()
             query = "SELECT * FROM PROJECTS"
 
             try:
@@ -58,7 +60,13 @@ class Database(object):
                 cursor.execute(query)
                 rows = cursor.fetchall()
 
-                return rows
+                # Get column names
+                columns = [col[0] for col in cursor.description]
+
+                # Build list of dicts
+                result = [dict(zip(columns, row)) for row in rows]
+
+                return result
 
             except Exception as error:
 
