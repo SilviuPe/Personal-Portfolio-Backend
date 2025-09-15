@@ -26,7 +26,7 @@ class Database(object):
                 port=port,
                 user=username,
                 password=password,
-                database=database
+                dbname=database
             )
 
             if connection:
