@@ -10,6 +10,9 @@ def gather_information_about_repo(projects: list):
 
         repo_data = {
             'repo_url': repo_link,
+            'project_name': project['project_name'],
+            'description': project['description'],
+            'stack': project['stack'],
         }
 
         link_elements = repo_link.split('/')
