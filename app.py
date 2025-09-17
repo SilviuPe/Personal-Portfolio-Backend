@@ -1,10 +1,18 @@
+import os
+
 from flask import Flask
 from flask_cors import CORS
 from database import Database
 from utils import gather_information_about_repo
+from dotenv import load_dotenv
+
 app = Flask(__name__)
 
-CORS(app)
+load_dotenv()
+
+ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS').split(",")
+
+CORS(app, resources={r"/*": {"origins": ALLOWED_ORIGINS}})
 
 @app.route('/projects', methods=['GET'])
 def index():
